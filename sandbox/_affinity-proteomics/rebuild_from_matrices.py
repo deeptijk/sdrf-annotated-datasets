@@ -97,6 +97,25 @@ SOMASCAN_COLUMNS = COMMON_COLUMNS + [
     "comment[sdrf annotation tool]",
 ]
 
+REQUIRED_COLUMNS = {
+    "source name",
+    "characteristics[organism]",
+    "characteristics[organism part]",
+    "characteristics[disease]",
+    "characteristics[age]",
+    "characteristics[sex]",
+    "characteristics[biological replicate]",
+    "assay name",
+    "technology type",
+    "comment[technical replicate]",
+    "comment[data file]",
+    "comment[platform]",
+    "comment[olink panel]",
+    "comment[olink platform]",
+    "comment[somascan menu]",
+    "comment[somascan platform]",
+}
+
 
 def clean(value: object) -> str:
     if value is None:
@@ -571,11 +590,31 @@ def infer_somascan_platform(assay_version: str, current_platform: str) -> str:
 
 
 def write_sdrf(path: Path, header: list[str], rows: list[list[str]]) -> None:
+    header, rows, _removed = prune_all_unavailable_optional_columns(header, rows)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as handle:
         writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
         writer.writerow(header)
         writer.writerows(rows)
+
+
+def prune_all_unavailable_optional_columns(
+    header: list[str], rows: list[list[str]]
+) -> tuple[list[str], list[list[str]], list[str]]:
+    keep_indexes: list[int] = []
+    removed: list[str] = []
+    for idx, column in enumerate(header):
+        if column in REQUIRED_COLUMNS:
+            keep_indexes.append(idx)
+            continue
+        values = [clean(row[idx]).lower() for row in rows]
+        if values and all(value == NA for value in values):
+            removed.append(column)
+        else:
+            keep_indexes.append(idx)
+    pruned_header = [header[idx] for idx in keep_indexes]
+    pruned_rows = [[row[idx] for idx in keep_indexes] for row in rows]
+    return pruned_header, pruned_rows, removed
 
 
 def row_templates(platform_family: str) -> list[str]:
