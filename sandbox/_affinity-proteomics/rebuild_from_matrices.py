@@ -65,12 +65,10 @@ COMMON_COLUMNS = [
     "comment[file uri]",
     "comment[platform]",
     "comment[instrument]",
-    "comment[panel name]",
     "comment[panel version]",
     "comment[quantification unit]",
     "comment[plate]",
     "comment[normalization method]",
-    "comment[fraction identifier]",
 ]
 
 OLINK_COLUMNS = COMMON_COLUMNS + [
@@ -79,9 +77,6 @@ OLINK_COLUMNS = COMMON_COLUMNS + [
     "comment[npx normalization]",
     "comment[olink lot number]",
     "comment[sdrf version]",
-    "comment[sdrf template]",
-    "comment[sdrf template]",
-    "comment[sdrf template]",
     "comment[sdrf annotation tool]",
 ]
 
@@ -91,9 +86,6 @@ SOMASCAN_COLUMNS = COMMON_COLUMNS + [
     "comment[dilution]",
     "comment[somascan lot number]",
     "comment[sdrf version]",
-    "comment[sdrf template]",
-    "comment[sdrf template]",
-    "comment[sdrf template]",
     "comment[sdrf annotation tool]",
 ]
 
@@ -618,11 +610,7 @@ def prune_all_unavailable_optional_columns(
 
 
 def row_templates(platform_family: str) -> list[str]:
-    return [
-        "NT=affinity-proteomics;VV=v1.0.0",
-        f"NT={platform_family};VV=v1.0.0",
-        "NT=human;VV=v1.1.0",
-    ]
+    return []
 
 
 def build_common_values(
@@ -664,12 +652,10 @@ def build_common_values(
         file_row["comment[file uri]"],
         platform,
         NA,
-        panel_name,
         panel_version or NA,
         quantification_unit,
         display_or_na(sample.get("plate")),
         display_or_na(sample.get("normalization")),
-        str(file_index),
     ]
 
 
@@ -748,7 +734,6 @@ def rebuild() -> None:
                         normalize_npx_method(sample.get("normalization")),
                         display_or_na(sample.get("lot")),
                         "v1.1.0",
-                        *row_templates("olink"),
                         "NT=sdrf-skills-autoresearch;VV=v0.0.0",
                     ]
                     sdrf_rows.append(row)
@@ -792,7 +777,6 @@ def rebuild() -> None:
                         normalize_dilution(sample.get("percent_dilution")),
                         NA,
                         "v1.1.0",
-                        *row_templates("somascan"),
                         "NT=sdrf-skills-autoresearch;VV=v0.0.0",
                     ]
                     sdrf_rows.append(row)
