@@ -1,0 +1,23 @@
+accession	path	platform_family	rows	sample_type_column	sdrf_template_columns	sample_type_values
+PAD000001	datasets/PAD000001/PAD000001.sdrf.tsv	olink	20	present	3	not applicable=20
+PAD000002	datasets/PAD000002/PAD000002.sdrf.tsv	olink	136	present	3	negative control=14; not applicable=96; plate control=16; quality control sample=10
+PAD000003	datasets/PAD000003/PAD000003.sdrf.tsv	somascan	241	present	3	not applicable=241
+PAD000004	datasets/PAD000004/PAD000004.sdrf.tsv	olink	192	present	3	negative control=18; not applicable=126; plate control=30; quality control sample=18
+PAD000005	datasets/PAD000005/PAD000005.sdrf.tsv	olink	92	present	3	not applicable=92
+PAD000006	datasets/PAD000006/PAD000006.sdrf.tsv	olink	92	present	3	not applicable=92
+PAD000008	datasets/PAD000008/PAD000008.sdrf.tsv	olink	616	present	3	not applicable=616
+PAD000009	datasets/PAD000009/PAD000009.sdrf.tsv	olink	110	present	3	negative control=8; not applicable=70; plate control=20; quality control sample=12
+PAD000010	datasets/PAD000010/PAD000010.sdrf.tsv	somascan	52	present	3	calibrator=5; not applicable=44; quality control sample=3
+PAD000013	datasets/PAD000013/PAD000013.sdrf.tsv	somascan	62	present	3	calibrator=10; not applicable=46; quality control sample=6
+PAD000014	datasets/PAD000014/PAD000014.sdrf.tsv	somascan	236	present	3	calibrator=20; not applicable=204; quality control sample=12
+PAD000016	datasets/PAD000016/PAD000016.sdrf.tsv	olink	246	present	3	negative control=8; not applicable=210; plate control=20; quality control sample=8
+PAD000019	datasets/PAD000019/PAD000019.sdrf.tsv	olink	124	present	3	negative control=4; not applicable=104; plate control=10; quality control sample=6
+PAD000020	datasets/PAD000020/PAD000020.sdrf.tsv	somascan	120	present	3	calibrator=10; not applicable=104; quality control sample=6
+PAD000021	datasets/PAD000021/PAD000021.sdrf.tsv	somascan	5734	present	3	calibrator=310; not applicable=5238; quality control sample=186
+PAD000022	datasets/PAD000022/PAD000022.sdrf.tsv	olink	94	present	3	not applicable=94
+PAD000026	datasets/PAD000026/PAD000026.sdrf.tsv	somascan	96	present	3	calibrator=5; not applicable=88; quality control sample=3
+PAD000030	datasets/PAD000030/PAD000030.sdrf.tsv	olink	335	present	3	not applicable=335
+PAD000033	datasets/PAD000033/PAD000033.sdrf.tsv	olink	211	present	3	not applicable=211
+PAD000036	datasets/PAD000036/PAD000036.sdrf.tsv	somascan	847	present	3	calibrator=50; not applicable=767; quality control sample=30
+PAD000037	datasets/PAD000037/PAD000037.sdrf.tsv	olink	12	present	3	not applicable=12
+PAD000041	datasets/PAD000041/PAD000041.sdrf.tsv	olink	434	present	3	not applicable=434

@@ -43,6 +43,12 @@ VALID_SOMASCAN_MENUS = {
     "SomaScan 11K",
 }
 
+SDRF_TEMPLATE_COLUMNS = [
+    "comment[sdrf template]",
+    "comment[sdrf template]",
+    "comment[sdrf template]",
+]
+
 COMMON_COLUMNS = [
     "source name",
     "characteristics[organism]",
@@ -76,6 +82,7 @@ OLINK_COLUMNS = COMMON_COLUMNS + [
     "comment[olink platform]",
     "comment[npx normalization]",
     "comment[olink lot number]",
+    *SDRF_TEMPLATE_COLUMNS,
     "comment[sdrf version]",
     "comment[sdrf annotation tool]",
 ]
@@ -85,6 +92,7 @@ SOMASCAN_COLUMNS = COMMON_COLUMNS + [
     "comment[somascan platform]",
     "comment[dilution]",
     "comment[somascan lot number]",
+    *SDRF_TEMPLATE_COLUMNS,
     "comment[sdrf version]",
     "comment[sdrf annotation tool]",
 ]
@@ -151,6 +159,15 @@ def source_identifier(accession: str, sample_id: object) -> str:
 
 def assay_identifier(accession: str, assay_index: int, sample_id: object) -> str:
     return f"{accession}-r{assay_index:05d}-{slug(sample_id, 'sample')}"
+
+
+def template_values(platform_family: str) -> list[str]:
+    platform_template = "olink" if platform_family == "olink" else "somascan"
+    return [
+        "NT=affinity-proteomics;VV=v1.0.0",
+        "NT=human;VV=v1.1.0",
+        f"NT={platform_template};VV=v1.0.0",
+    ]
 
 
 def first_present(row: dict[str, object], names: list[str]) -> str:
@@ -754,6 +771,7 @@ def rebuild() -> None:
                         platform,
                         normalize_npx_method(sample.get("normalization")),
                         display_or_na(sample.get("lot")),
+                        *template_values("olink"),
                         "v1.1.0",
                         "NT=sdrf-skills-autoresearch;VV=v0.0.0",
                     ]
@@ -800,6 +818,7 @@ def rebuild() -> None:
                         somascan_platform,
                         normalize_dilution(sample.get("percent_dilution")),
                         NA,
+                        *template_values("somascan"),
                         "v1.1.0",
                         "NT=sdrf-skills-autoresearch;VV=v0.0.0",
                     ]
